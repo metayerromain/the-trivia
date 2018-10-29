@@ -6,7 +6,7 @@ class HomeContainer extends Component{
         return(
         <Home />
         );
-    }
+    } 
 }
 
 export default HomeContainer;
