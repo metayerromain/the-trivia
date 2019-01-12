@@ -1,4 +1,4 @@
-class api {
+class Api {
   async getCategoryById(id) {
     const category = await fetch(`http://jservice.io/api/category?id=${id}`);
     const json = await category.json();
@@ -6,4 +6,7 @@ class api {
   }
 }
 
-export default new api();
+
+
+
+export const api = new Api();
