@@ -100,10 +100,14 @@ class CategoryContainer extends Component {
       count: 0,
     })
     var removeScore = localStorage.getItem('category-'+this.state.actualLink);
-    removeScore = removeScore.split(',')[0];
-    removeScore = removeScore.split('[')[1];
-    localSto.removeLocalStorageItem('category-'+this.state.actualLink);
-    this.setAllScore(removeScore);
+    if (removeScore === 0 || removeScore === null){
+      return false;
+    } else {
+      removeScore = removeScore.split(',')[0];
+      removeScore = removeScore.split('[')[1];
+      localSto.removeLocalStorageItem('category-'+this.state.actualLink);
+      this.setAllScore(removeScore);
+    }
   }
 
   render() {
@@ -116,14 +120,37 @@ class CategoryContainer extends Component {
     else if(life === 0 || life < 1) {
       return(
         <div className="container-lose">
-          <div>vous avez plus de vie</div>
+          <header className="header">
+            <a href="../">
+              <div className="header--logo">
+                <img className="header--image" src="https://svgur.com/i/AUv.svg"/>
+                <h1 className="header--title">Cookie<span className="header--titleSecondary">Quiz</span></h1>
+              </div>
+            </a>
+          </header>
+          <div className="lose">
+            <h2 className="lose--text">Game Over !</h2>
+            <a href="../"><div className="lose--back">Retour à l'accueil</div></a>
+          </div>
         </div>
       )
     } else {
       if(category.clues[count] === undefined){
         return (
           <div className="container-win">
-            <div>vous avez gagné cette catégorie</div>
+            <header className="header">
+              <a href="../">
+                <div className="header--logo">
+                  <img className="header--image" src="https://svgur.com/i/AUv.svg"/>
+                  <h1 className="header--title">Cookie<span className="header--titleSecondary">Quiz</span></h1>
+                </div>
+              </a>
+            </header>
+            <div className="win">
+              <h3 className="win--score">{score}/5</h3>
+              <h2 className="win--text">Félicitations, vous avez gagné <span className="win--textBold">{score}</span> cookies ! 😍</h2>
+              <a href="../"><div className="win--back">Retour à l'accueil</div></a>
+            </div>
           </div>
         )
       }
